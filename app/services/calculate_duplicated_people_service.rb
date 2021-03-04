@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CalculateDuplicatedPeople
+class CalculateDuplicatedPeopleService
   attr_reader :people
 
   def initialize(people)

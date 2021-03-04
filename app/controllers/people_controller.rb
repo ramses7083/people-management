@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class PeopleController < ApplicationController
+  before_action :require_token
+
   def index
     token = ENV['SALESLOFT_TOKEN']
     url = 'https://api.salesloft.com/v2/people.json'
@@ -9,7 +11,13 @@ class PeopleController < ApplicationController
     people_data = response_json['data']
     people_array = people_data.map { |a| Person.new.from_json(a.to_json) }
     gon.people_list = FormatPeopleListService.new(people_array).execute
-    gon.frecuency_count = CalculateFrequencyCount.new(people_array).execute
-    gon.duplicated_people = CalculateDuplicatedPeople.new(people_array).execute
+    gon.frecuency_count = CalculateFrequencyCountService.new(people_array).execute
+    gon.duplicated_people = CalculateDuplicatedPeopleService.new(people_array).execute
+  end
+
+  private
+
+  def require_token
+    redirect_to error_index_path if ENV['SALESLOFT_TOKEN'].nil?
   end
 end

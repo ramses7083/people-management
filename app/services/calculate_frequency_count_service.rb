@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CalculateFrequencyCount
+class CalculateFrequencyCountService
   attr_reader :people
 
   def initialize(people)
