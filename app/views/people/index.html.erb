@@ -1,0 +1,13 @@
+<div class="container-fluid">
+  <h1 class="text-center display-5">People at Salesloft API</h1>
+  <div class="row">
+    <div class="mx-auto">
+      <button id="show-fecuency-btn" class="btn btn-success">Show frecuency count</button>
+      <button id="show-duplicated-btn" class="btn btn-primary">Show duplicated people</button>
+    </div>
+    <div class="col-12 col-lg-9" id="people_table"></div>
+    <div class="col-12 col-lg-3" id="result"><h5 class="text-center">Results</h5></div>
+  </div>
+
+  <%= javascript_pack_tag 'people/index' %>
+</div>

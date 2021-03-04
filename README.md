@@ -1,24 +1,29 @@
-# README
+# People management
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This app is about a management software for people in the organization.
 
-Things you may want to cover:
+# Installation
 
-* Ruby version
+Download this project and then execute the next commands to setup the project
 
-* System dependencies
+`rbenv install 2.6.3`
 
-* Configuration
+`rbenv local 2.6.3`
 
-* Database creation
+`gem install bundler`
 
-* Database initialization
+`bundle install`
 
-* How to run the test suite
+In this moment, you are ready to add the token value in the environment variable and start the server with the next commands
 
-* Services (job queues, cache servers, search engines, etc.)
+`export SALESLOFT_TOKEN=<TOKEN_VALUE>`
 
-* Deployment instructions
+`rails server`
 
-* ...
+Now you can play with the app in the url `http://localhost:3000/` 
+
+You can run the tests with the next command:
+
+`rails test`
+
+If you have some comments you can send them to `ramses7083@gmail.com`.
