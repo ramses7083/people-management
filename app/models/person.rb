@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Person
   include ActiveModel::Serializers::JSON
 
@@ -19,5 +21,4 @@ class Person
   def attributes
     instance_values
   end
-
 end

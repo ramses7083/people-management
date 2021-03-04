@@ -18,20 +18,24 @@ class CalculateDuplicatedPeopleService
 
   def duplicated_people_list
     @people.each_with_index do |person, index|
-      duplicate_found = false
-      duplicate_emails = ''
-      for i in index+1..@people.count-1
-        username = person.email_address.username_from_email
-        username_to_compare = @people[i].email_address.username_from_email
-        if username.include?(username_to_compare) || username_to_compare.include?(username) ||
-          usernames_are_similar(username, username_to_compare) || usernames_are_similar(username_to_compare, username)
-          duplicate_found = true
-          duplicate_emails += "#{@people[i].email_address} "
-        end
+      @duplicate_found = false
+      @duplicate_emails = ''
+      for index2 in index + 1..@people.count - 1
+        compare_usernames(index2, person)
       end
-      @result.push([person.email_address, duplicate_emails]) if duplicate_found
+      @result.push([person.email_address, @duplicate_emails]) if @duplicate_found
     end
     @result
+  end
+
+  def compare_usernames(index, person)
+    username = person.email_address.username_from_email
+    username_to_compare = @people[index].email_address.username_from_email
+    if username.include?(username_to_compare) || username_to_compare.include?(username) ||
+       usernames_are_similar(username, username_to_compare) || usernames_are_similar(username_to_compare, username)
+      @duplicate_found = true
+      @duplicate_emails += "#{@people[index].email_address} "
+    end
   end
 
   def usernames_are_similar(username, username_to_compare)
@@ -44,7 +48,7 @@ class CalculateDuplicatedPeopleService
     end
 
     return true if character_match_count == username.size &&
-      character_match_count + @max_typo_erros == username_to_compare.size
+                   character_match_count + @max_typo_erros == username_to_compare.size
 
     false
   end

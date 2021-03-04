@@ -5,7 +5,7 @@ class CalculateFrequencyCountService
 
   def initialize(people)
     @people = people
-    @headers = ['Character', 'Count']
+    @headers = %w[Character Count]
     @characteres = {}
   end
 
@@ -25,7 +25,7 @@ class CalculateFrequencyCountService
         end
       end
     end
-    data = @characteres.sort_by {|key, value| value}.reverse
+    data = @characteres.sort_by { |_key, value| value }.reverse
     data.unshift(@headers)
     data
   end
